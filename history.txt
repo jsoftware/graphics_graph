@@ -2,3 +2,6 @@ graphics/graph - change history
 
 == 1.0.0 ==
  * initial 701 release
+
+== 1.0.1 ==
+ * gtkbox and gtkda renamed as canvas
