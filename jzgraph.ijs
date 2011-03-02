@@ -334,7 +334,7 @@ consig3 window;'delete-event';'pclose'
 gloc=: glcanvas pid;(,'g');200 200;coname''
 box=. gtk_vbox_new 0 0
 gtk_container_add window,box
-gtk_box_pack_start box, gtkbox__gloc, 1 1 0
+gtk_box_pack_start box, canvas__gloc, 1 1 0
 gtk_window_set_keep_above window,1
 gtk_widget_show_all window
 gdaddid (,pid);window;coname''
@@ -342,7 +342,7 @@ if. #siz do.
   cx=. ,_1 [ cy=. ,_1
   gtk_window_get_position window;cx;cy
   fx=. cx,cy
-  wh=. _2 {. getGtkWidgetAllocation gtkda__gloc 
+  wh=. _2 {. getGtkWidgetAllocation canvas__gloc
   del=. siz - wh
   gtk_window_set_default_size window,del
 else.
