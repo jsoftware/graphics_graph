@@ -331,21 +331,14 @@ window=: gtk_window_new GTK_WINDOW_TOPLEVEL
 gtk_widget_set_name window;pid
 gtk_window_set_title window;pnm
 consig3 window;'delete-event';'pclose'
-gloc=: glcanvas pid;(,'g');200 200;coname''
+gloc=: glcanvas pid;'g';((0=#siz){::siz;_1 _1);coname''
 box=. gtk_vbox_new 0 0
 gtk_container_add window,box
 gtk_box_pack_start box, canvas__gloc, 1 1 0
 gtk_window_set_keep_above window,1
 gtk_widget_show_all window
 gdaddid (,pid);window;coname''
-if. #siz do.
-  cx=. ,_1 [ cy=. ,_1
-  gtk_window_get_position window;cx;cy
-  fx=. cx,cy
-  wh=. _2 {. getGtkWidgetAllocation canvas__gloc
-  del=. siz - wh
-  gtk_window_set_default_size window,del
-else.
+if. 0=#siz do.
   gtk_window_move window,600 20 
 end.
 (pid,'_g_paint')=: ppaint
@@ -355,6 +348,7 @@ wdfit''
 )
 pclose=: 3 : 0
 destroy''
+0
 )
 pshow=: 3 : 0
 glsel gloc
