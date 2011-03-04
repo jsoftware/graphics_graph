@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 2D Graph
 )
 
-VERSION=: '1.0.1'
+VERSION=: '1.0.2'
 
 DEPENDS=: 0 : 0
 graphics/bmp

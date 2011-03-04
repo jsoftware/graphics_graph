@@ -5,3 +5,6 @@ graphics/graph - change history
 
 == 1.0.1 ==
  * gtkbox and gtkda renamed as canvas
+
+== 1.0.2 ==
+ * bug fix

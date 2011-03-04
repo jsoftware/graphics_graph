@@ -328,8 +328,8 @@ popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y
 pnm=. pnm, (0=#pnm) # pid
 window=: gtk_window_new GTK_WINDOW_TOPLEVEL
-gtk_widget_set_name window;pid
-gtk_window_set_title window;pnm
+gtk_widget_set_name window;,pid
+gtk_window_set_title window;,pnm
 consig3 window;'delete-event';'pclose'
 gloc=: glcanvas pid;'g';((0=#siz){::siz;_1 _1);coname''
 box=. gtk_vbox_new 0 0
