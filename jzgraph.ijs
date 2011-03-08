@@ -1,12 +1,11 @@
 require 'bmp color16 gtk gl2'
 
 coclass 'jzgraph'
-coinsert 'jgtk jgl2'
+coinsert 'jgl2'
 
 GDLOC=: <''
 GDIDS=: 0 3 $ <''
 EMPTY=: i. 0 0
-FIXFONT=: PROFONT=: '"MS Sans Serif" 10'
 create=: 3 : 0
 window=: 0
 reset''
@@ -16,7 +15,7 @@ GDCMD=: i.0 2
 )
 destroy=: 3 : 0
 gddel window
-gtk_widget_destroy ::0: window
+gtk_widget_destroy_jgtk_ ::0: window
 codestroy''
 )
 index=: #@[ (| - =) i.
@@ -109,7 +108,7 @@ gdloc {: y
 )
 gdclean=: 3 : 0
 if. 0=#GDIDS do. return. end.
-msk=. (>1 {"1 GDIDS) e. getGtkToplevelWindows''
+msk=. (>1 {"1 GDIDS) e. getGtkToplevelWindows_jgtk_''
 if. -. 0 e. msk do. return. end.
 ndx=. I. -. msk
 coerase (18!:1[1) intersect 2 {"1 ndx { GDIDS
@@ -327,19 +326,19 @@ EMPTY
 popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y
 pnm=. pnm, (0=#pnm) # pid
-window=: gtk_window_new GTK_WINDOW_TOPLEVEL
-gtk_widget_set_name window;,pid
-gtk_window_set_title window;,pnm
-consig3 window;'delete-event';'pclose'
+window=: gtk_window_new_jgtk_ GTK_WINDOW_TOPLEVEL_jgtk_
+gtk_widget_set_name_jgtk_ window;,pid
+gtk_window_set_title_jgtk_ window;,pnm
+consig3_jgtk_ window;'delete-event';'pclose';coname''
 gloc=: glcanvas pid;'g';((0=#siz){::siz;_1 _1);coname''
-box=. gtk_vbox_new 0 0
-gtk_container_add window,box
-gtk_box_pack_start box, canvas__gloc, 1 1 0
-gtk_window_set_keep_above window,1
-gtk_widget_show_all window
+box=. gtk_vbox_new_jgtk_ 0 0
+gtk_container_add_jgtk_ window,box
+gtk_box_pack_start_jgtk_ box, canvas__gloc, 1 1 0
+gtk_window_set_keep_above_jgtk_ window,1
+gtk_widget_show_all_jgtk_ window
 gdaddid (,pid);window;coname''
 if. 0=#siz do.
-  gtk_window_move window,600 20 
+  gtk_window_move_jgtk_ window,600 20
 end.
 (pid,'_g_paint')=: ppaint
 (pid,'_close')=: pclose

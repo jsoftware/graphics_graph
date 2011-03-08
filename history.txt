@@ -8,3 +8,6 @@ graphics/graph - change history
 
 == 1.0.2 ==
  * bug fix
+
+== 1.0.3 ==
+ * FONT defauted to PROFONT_jgl_
