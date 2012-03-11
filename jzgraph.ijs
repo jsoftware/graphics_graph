@@ -330,7 +330,7 @@ window=: gtk_window_new_jgtk_ GTK_WINDOW_TOPLEVEL_jgtk_
 gtk_widget_set_name_jgtk_ window;,pid
 gtk_window_set_title_jgtk_ window;,pnm
 consig3_jgtk_ window;'delete-event';'pclose';coname''
-gloc=: glcanvas pid;'g';((0=#siz){::siz;_1 _1);coname''
+gloc=: glcanvas ((0=#siz){::siz;_1 _1);coname''
 box=. gtk_vbox_new_jgtk_ 0 0
 gtk_container_add_jgtk_ window,box
 gtk_box_pack_start_jgtk_ box, canvas__gloc, 1 1 0
@@ -363,3 +363,15 @@ for_d. GDCMD do.
   f~v
 end.
 )
+isigraph_event=: 4 : 0
+widget=. canvas__y
+evt=. >@{.x
+syshandler=. pid, '_handler'
+sysevent=. pid, '_', 'g', '_', evt
+sysdefault=. pid, '_default'
+wdd=. ;: 'syshandler sysevent sysdefault'
+wdqdata=. (wdd ,. ".&.>wdd)
+evthandler wdqdata
+0
+)
+
