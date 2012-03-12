@@ -12,5 +12,5 @@ graphics/graph - change history
 == 1.0.3 ==
  * FONT defauted to PROFONT_jgl_
 
-== 1.0.4 ==
+== 1.0.4/5 ==
  * gl2 changed

@@ -363,9 +363,8 @@ for_d. GDCMD do.
   f~v
 end.
 )
-isigraph_event=: 4 : 0
-widget=. canvas__y
-evt=. >@{.x
+gtkwidget_event=: 4 : 0
+evt=. >@{.y
 syshandler=. pid, '_handler'
 sysevent=. pid, '_', 'g', '_', evt
 sysdefault=. pid, '_default'
