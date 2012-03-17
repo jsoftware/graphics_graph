@@ -51,7 +51,7 @@ FONT=: PROFONT
 )
 initwin=: 3 : 0
 try.
-  glsel gloc
+  glsel canvas
 catch. destroy'' return.
 end.
 wh=. glqwh''
@@ -330,10 +330,10 @@ window=: gtk_window_new_jgtk_ GTK_WINDOW_TOPLEVEL_jgtk_
 gtk_widget_set_name_jgtk_ window;,pid
 gtk_window_set_title_jgtk_ window;,pnm
 consig3_jgtk_ window;'delete-event';'pclose';coname''
-gloc=: glcanvas ((0=#siz){::siz;_1 _1);coname''
+canvas=: glcanvas ((0=#siz){::siz;_1 _1);coname''
 box=. gtk_vbox_new_jgtk_ 0 0
 gtk_container_add_jgtk_ window,box
-gtk_box_pack_start_jgtk_ box, canvas__gloc, 1 1 0
+gtk_box_pack_start_jgtk_ box, canvas, 1 1 0
 gtk_window_set_keep_above_jgtk_ window,1
 gtk_widget_show_all_jgtk_ window
 gdaddid (,pid);window;coname''
@@ -350,7 +350,7 @@ destroy''
 0
 )
 pshow=: 3 : 0
-glsel gloc
+glsel canvas
 ppaint''
 glpaint''
 )
