@@ -51,7 +51,7 @@ FONT=: PROFONT
 )
 initwin=: 3 : 0
 try.
-  glsel canvas
+  glsel ":canvas
 catch. destroy'' return.
 end.
 wh=. glqwh''
@@ -350,7 +350,7 @@ destroy''
 0
 )
 pshow=: 3 : 0
-glsel canvas
+glsel ":canvas
 ppaint''
 glpaint''
 )
@@ -363,7 +363,7 @@ for_d. GDCMD do.
   f~v
 end.
 )
-gtkwidget_event=: 4 : 0
+isigraph_event=: 4 : 0
 evt=. >@{.y
 syshandler=. pid, '_handler'
 sysevent=. pid, '_', 'g', '_', evt
