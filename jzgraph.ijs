@@ -22,7 +22,7 @@ index=: #@[ (| - =) i.
 intersect=: e. # [
 roundint=: <.@:+&0.5
 handles=: 1: {"1 <;._2;._2 @ wd @ ('qpx'"_)
-parents=: <;._2@wd@('qp'"_)
+parents=: 0: {"1 <;._2@wd@('qpx'"_)
 isparent=: boxopen e. parents
 flipyarc=: 3 : 0
 y=. _8[\,y
@@ -39,7 +39,7 @@ c=. H - +/"1 [ 1 3{"1 y
 ($y) $ ,c 1}"0 1 y
 )
 gettemp=: 3 : 0
-p=. jpath '~temp\'
+p=. jpath '~temp/'
 d=. 1!:0 p,'*.',y
 a=. 0, {.@:(0&".)@> _4 }. each {."1 d
 a=. ": {. (i. >: #a) -. a
@@ -204,8 +204,6 @@ gdshow=: 3 : 'pshow__GDLOC y'
 gdtextcolor=: buf @ ('textcolor'&;)
 
 gdbmp=: 3 : 'pbmp__GDLOC y'
-gdemf=: 3 : 'pemf__GDLOC y'
-gdclip=: 3 : 'pclip__GDLOC y'
 gdadd=: 1 : 0
 gdselopen''
 gdshow u y
@@ -326,33 +324,6 @@ res=. glqpixels box
 bmp=. (3 2{box) $ res
 bmp writebmp jpath y
 EMPTY
-)
-pclip=: 3 : 0
-if. -. IFWIN do.
-  info 'Save graph to clipboard is only available in Windows'
-  return.
-end.
-f=. gettemp 'emf'
-pemf f
-wd 'clipcopyx enhmetafile "',f,'"'
-1!:55 <f
-EMPTY
-)
-pemf=: 3 : 0
-if. -. IFWIN do.
-  info 'Save graph to emf is only available in Windows'
-  return.
-end.
-if. 0=#y do.
-  y=. '~temp/graph.emf'
-else.
-  y=. y, (-. '.emf' -: _4 {. y) # '.emf'
-end.
-initwin''
-glfile jpath y
-glemfopen''
-ppaint''
-glemfclose''
 )
 popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y

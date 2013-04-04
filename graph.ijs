@@ -43,9 +43,7 @@ NB.
 NB. other definitions:
 NB.   gdadd        add wrapper
 NB.   gdbmp        write graph to bmp file
-NB.   gdclip       write graph to clipboard (Windows only)
 NB.   gddraw       draw wrapper
-NB.   gdemf        write graph to emf file (Windows only)
 NB.   gdopen       open/clear graphics window
 NB.   gdselect     select graphics window
 NB.   gdshow       show graph
@@ -61,7 +59,6 @@ NB.*gdcolor v set color
 NB.*gddraw v wrapper for draw methods
 NB.*gdellipse v draw ellipse
 NB.*gdellipse01 v draw ellipse in 0 0 1 1
-NB.*gdemf v write graph to emf file
 NB.*gdlines v draw lines
 NB.*gdlines01 v draw lines in 0 0 1 1
 NB.*gdopen v open/clear graphics window
@@ -89,7 +86,7 @@ NB. define cover verbs:
 f=. (,&'=:') , (,&'_jzgraph_')
 f01=. (,&'01=:') , (,&'01_jzgraph_')
 
-j=. 'add bmp clip close closeall color draw emf font open'
+j=. 'add bmp close closeall color draw font open'
 j=. j,' pen pencolor reset select selopen show textcolor'
 nms=. 'gd'&, each ;: j
 do f &> nms

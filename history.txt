@@ -18,5 +18,5 @@ graphics/graph - change history
 == 1.0.7 ==
  * qt
     
-== 1.0.8 ==
+== 1.0.8/.. ==
  * j801
