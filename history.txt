@@ -14,6 +14,9 @@ graphics/graph - change history
 
 == 1.0.4/6 ==
  * gl2 changed
-
+    
 == 1.0.7 ==
  * qt
+    
+== 1.0.8 ==
+ * j801

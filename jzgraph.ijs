@@ -1,5 +1,3 @@
-require 'bmp color16 gtk gl2'
-
 coclass 'jzgraph'
 coinsert 'jgl2'
 
@@ -7,20 +5,25 @@ GDLOC=: <''
 GDIDS=: 0 3 $ <''
 EMPTY=: i. 0 0
 create=: 3 : 0
-window=: 0
+HWNDP=: ''
 reset''
 )
 reset=: 3 : 0
 GDCMD=: i.0 2
 )
 destroy=: 3 : 0
-gddel window
-gtk_widget_destroy_jgtk_ ::0: window
+wd :: ] 'psel ',HWNDP,';pclose'
+gddel HWNDP
 codestroy''
 )
+deb=: #~ (+. (1: |. (> </\)))@(' '&~:)
+info=: wdinfo @ ('graph'&;)
 index=: #@[ (| - =) i.
 intersect=: e. # [
 roundint=: <.@:+&0.5
+handles=: 1: {"1 <;._2;._2 @ wd @ ('qpx'"_)
+parents=: <;._2@wd@('qp'"_)
+isparent=: boxopen e. parents
 flipyarc=: 3 : 0
 y=. _8[\,y
 c=. H - (+/"1 [ 1 3{"1 y) ,. 5 7{"1 y
@@ -51,7 +54,7 @@ FONT=: PROFONT
 )
 initwin=: 3 : 0
 try.
-  glsel ":canvas
+  glsel HWNDC
 catch. destroy'' return.
 end.
 wh=. glqwh''
@@ -107,8 +110,7 @@ gdids y, GDIDS
 gdloc {: y
 )
 gdclean=: 3 : 0
-if. 0=#GDIDS do. return. end.
-msk=. (>1 {"1 GDIDS) e. getGtkToplevelWindows_jgtk_''
+msk=. (1 {"1 GDIDS) e. handles''
 if. -. 0 e. msk do. return. end.
 ndx=. I. -. msk
 coerase (18!:1[1) intersect 2 {"1 ndx { GDIDS
@@ -116,10 +118,10 @@ gdids (<<<ndx) { GDIDS
 gdloc''
 )
 gdids=: 3 : 0
-GDIDS_jzgraph_=: ~.y
+GDIDS_jzgraph_=: y
 )
 gddel=: 3 : 0
-gdids GDIDS #~ y ~: >1 {"1 GDIDS
+gdids GDIDS #~ (<y) ~: 1 {"1 GDIDS
 gdloc''
 )
 gdloc=: 3 : 0
@@ -202,6 +204,8 @@ gdshow=: 3 : 'pshow__GDLOC y'
 gdtextcolor=: buf @ ('textcolor'&;)
 
 gdbmp=: 3 : 'pbmp__GDLOC y'
+gdemf=: 3 : 'pemf__GDLOC y'
+gdclip=: 3 : 'pclip__GDLOC y'
 gdadd=: 1 : 0
 gdselopen''
 gdshow u y
@@ -230,7 +234,7 @@ else.
   nam=. <,> y
   nms=. 0 {"1 GDIDS
   if. -. nam e. nms do.
-    sminfo 'graph';'Not found: ',>nam return.
+    wdinfo 'graph';'Not found: ',>nam return.
   end.
   loc=. {: (nms i. nam) { GDIDS
 end.
@@ -261,7 +265,7 @@ gdclean''
 nam=. <,> y
 nms=. 0 {"1 GDIDS
 if. -. nam e. nms do.
-  sminfo 'graph';'Not found: ',>nam return.
+  wdinfo 'graph';'Not found: ',>nam return.
 end.
 gdloc {: (nms i. nam) { GDIDS
 EMPTY
@@ -323,36 +327,61 @@ bmp=. (3 2{box) $ res
 bmp writebmp jpath y
 EMPTY
 )
+pclip=: 3 : 0
+if. -. IFWIN do.
+  info 'Save graph to clipboard is only available in Windows'
+  return.
+end.
+f=. gettemp 'emf'
+pemf f
+wd 'clipcopyx enhmetafile "',f,'"'
+1!:55 <f
+EMPTY
+)
+pemf=: 3 : 0
+if. -. IFWIN do.
+  info 'Save graph to emf is only available in Windows'
+  return.
+end.
+if. 0=#y do.
+  y=. '~temp/graph.emf'
+else.
+  y=. y, (-. '.emf' -: _4 {. y) # '.emf'
+end.
+initwin''
+glfile jpath y
+glemfopen''
+ppaint''
+glemfclose''
+)
 popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y
 pnm=. pnm, (0=#pnm) # pid
-window=: gtk_window_new_jgtk_ GTK_WINDOW_TOPLEVEL_jgtk_
-gtk_widget_set_name_jgtk_ window;,pid
-gtk_window_set_title_jgtk_ window;,pnm
-consig3_jgtk_ window;'delete-event';'pclose';coname''
-canvas=: glcanvas ((0=#siz){::siz;_1 _1);coname''
-box=. gtk_vbox_new_jgtk_ 0 0
-gtk_container_add_jgtk_ window,box
-gtk_box_pack_start_jgtk_ box, canvas, 1 1 0
-gtk_window_set_keep_above_jgtk_ window,1
-gtk_widget_show_all_jgtk_ window
-gdaddid (,pid);window;coname''
-if. 0=#siz do.
-  gtk_window_move_jgtk_ window,600 20
+wd 'pc ',pid,';pn *',pnm
+wd 'wh 200 200;cc g isigraph'
+wd 'pas 0 0;pcenter;ptop'
+HWNDP=: wd 'qhwndp'
+HWNDC=: wd 'qhwndc g'
+gdaddid (,pid);HWNDP;coname''
+if. #siz do.
+  fx=. 0 ". wd 'qform'
+  wh=. _2 {. 0 ". wd 'qchildxywh g'
+  del=. siz - wh
+  wd 'pmove ',":fx + 0 0,del
+else.
+  fx=. 0 ". wd 'qform'
+  wd 'pmove 300 10 ',": 2 }. fx
 end.
 (pid,'_g_paint')=: ppaint
+(pid,'_cancel')=: pclose
 (pid,'_close')=: pclose
 wdfit''
-''
 )
-pclose=: 3 : 0
-destroy''
-0
-)
+pclose=: destroy
 pshow=: 3 : 0
-glsel ":canvas
 ppaint''
 glpaint''
+wd 'pshow'
 )
 ppaint=: 3 : 0
 initdef''
@@ -363,14 +392,3 @@ for_d. GDCMD do.
   f~v
 end.
 )
-isigraph_event=: 4 : 0
-evt=. >@{.y
-syshandler=. pid, '_handler'
-sysevent=. pid, '_', 'g', '_', evt
-sysdefault=. pid, '_default'
-wdd=. ;: 'syshandler sysevent sysdefault'
-wdqdata=. (wdd ,. ".&.>wdd)
-evthandler wdqdata
-0
-)
-
