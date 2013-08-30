@@ -329,7 +329,7 @@ popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y
 pnm=. pnm, (0=#pnm) # pid
 wd 'pc ',pid,';pn *',pnm
-wd 'minwh 200 200;cc g isigraph'
+wd 'minwh 200 200;cc g isigraph flush'
 wd 'pas 0 0;pcenter;ptop'
 HWNDP=: wd 'qhwndp'
 HWNDC=: wd 'qhwndc g'
