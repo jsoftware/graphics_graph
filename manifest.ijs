@@ -12,7 +12,6 @@ DEPENDS=: 0 : 0
 graphics/bmp
 graphics/color
 graphics/gl2
-ide/qt
 )
 
 FILES=: 0 : 0
