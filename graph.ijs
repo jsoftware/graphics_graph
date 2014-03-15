@@ -79,7 +79,7 @@ NB.*gdshow v show graphics
 
 cocurrent 'z'
 
-require 'color16 wdclass jzgraph'
+require 'color16 gl2 jzgraph'
 
 NB. =========================================================
 NB. define cover verbs:
