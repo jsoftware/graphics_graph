@@ -42,7 +42,7 @@ NB.   gdtext       draw text
 NB.
 NB. other definitions:
 NB.   gdadd        add wrapper
-NB.   gdbmp        write graph to bmp file
+NB.   gdpng        write graph to png file
 NB.   gddraw       draw wrapper
 NB.   gdopen       open/clear graphics window
 NB.   gdselect     select graphics window
@@ -50,7 +50,7 @@ NB.   gdshow       show graph
 
 NB.*gdarc v draw arc
 NB.*gdarc01 v draw arc in 0 0 1 1
-NB.*gdbmp v write graph to bmp file
+NB.*gdpng v write graph to png file
 NB.*gdchord v draw chord
 NB.*gdchord01 v draw chord in 0 0 1 1
 NB.*gdclose v close graphics window
@@ -86,7 +86,7 @@ NB. define cover verbs:
 f=. (,&'=:') , (,&'_jzgraph_')
 f01=. (,&'01=:') , (,&'01_jzgraph_')
 
-j=. 'add bmp close closeall color draw font open'
+j=. 'add png close closeall color draw font open'
 j=. j,' pen pencolor reset select selopen show textcolor'
 nms=. 'gd'&, each ;: j
 do f &> nms

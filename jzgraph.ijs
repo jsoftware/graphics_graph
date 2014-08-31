@@ -203,7 +203,7 @@ gdfont=: buf @ ('font'&;)
 gdshow=: 3 : 'pshow__GDLOC y'
 gdtextcolor=: buf @ ('textcolor'&;)
 
-gdbmp=: 3 : 'pbmp__GDLOC y'
+gdpng=: 3 : 'ppng__GDLOC y'
 gdadd=: 1 : 0
 gdselopen''
 gdshow u y
@@ -312,17 +312,17 @@ gdpolygon01=: buf @ ('polygon01'&;) f "1 L: 0
 gdrect01=: buf @ ('rect01'&;) f "1 L: 0
 gdroundr01=: buf @ ('roundr01'&;) f "1 L: 0
 gdtext01=: buf @ ('text01';<) h "1
-pbmp=: 3 : 0
+ppng=: 3 : 0
 if. 0=#y do.
-  y=. '~temp/graph.bmp'
+  y=. '~temp/graph.png'
 else.
-  y=. y, (-. '.bmp' -: _4 {. y) # '.bmp'
+  y=. y, (-. '.png' -: _4 {. y) # '.png'
 end.
 initwin''
 box=. 0 0, glqwh''
 res=. glqpixels box
-bmp=. (3 2{box) $ res
-bmp writebmp jpath y
+png=. (3 2{box) $ res
+png writepng jpath y
 EMPTY
 )
 popen=: 3 : 0

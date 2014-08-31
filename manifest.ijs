@@ -6,12 +6,12 @@ DESCRIPTION=: 0 : 0
 2D Graph
 )
 
-VERSION=: '1.0.15'
+VERSION=: '1.0.16'
 
 DEPENDS=: 0 : 0
-graphics/bmp
 graphics/color
 graphics/gl2
+graphics/png
 )
 
 FILES=: 0 : 0
@@ -20,4 +20,4 @@ graph.ijs
 history.txt
 )
 
-RELEASE=: 'j802 j803'
+RELEASE=: 'j803'
