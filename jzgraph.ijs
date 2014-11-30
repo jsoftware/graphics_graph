@@ -1,3 +1,5 @@
+require 'png'
+
 coclass 'jzgraph'
 coinsert 'jgl2'
 
