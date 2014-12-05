@@ -272,10 +272,12 @@ EMPTY
 )
 gddraw=: 1 : 0
 gdopen''
-gdshow u y
+gdshow''
+u y
 :
 gdopen''
-gdshow x u y
+gdshow''
+x u y
 )
 gdpencolor=: 3 : 0
 'c p'=. 2 {. boxopen y
