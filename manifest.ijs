@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 2D Graph
 )
 
-VERSION=: '1.0.20'
+VERSION=: '1.0.21'
 
 DEPENDS=: 0 : 0
 graphics/color
@@ -20,4 +20,4 @@ graph.ijs
 history.txt
 )
 
-RELEASE=: 'j803 j804 j805'
+RELEASE=: 'j803 j804 j805 j806'
