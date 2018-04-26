@@ -20,4 +20,6 @@ graph.ijs
 history.txt
 )
 
-RELEASE=: 'j803 j804 j805 j806 j807'
+RELEASE=: ''
+
+FOLDER=: 'graphics/graph'
