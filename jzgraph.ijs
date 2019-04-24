@@ -367,3 +367,52 @@ for_d. GDCMD do.
   f~v
 end.
 )
+cocurrent 'z'
+
+HUES=: 255*|."1#:7|3^i.7
+cile=: $@] $ ((* <.@:% #@]) /:@/:@,)
+grayscale=: 3&#"0 @ >.@ (255&*)
+fit01=: 3 : 0
+0 fit01 y
+:
+dat=. y
+s=. $dat
+if. x=0 do. dat=. ,dat end.
+min=. <./dat
+max=. >./dat
+s $ ,(dat -"1 min) %"1 max-min
+)
+fit11=: <: @: +: @: fit01
+fitrect01=: 0&$: : (4 : 0)
+s=. $y
+'x y w h'=. |: _4[\ ,y
+rx=. #x
+d=. x fit01 (x,x+w) ,. y,y+h
+'x xw'=. (2,rx)${."1 d
+'y yh'=. (2,rx)${:"1 d
+s $ , x,.y,.(xw-x),.yh-y
+)
+fitrect11=: 3 : 0
+s=. $y
+'x y w h'=. |: _4[\ ,y
+rx=. #x
+d=. <: +: x fit01 (x,x+w) ,. y,y+h
+'x xw'=. (2,rx)${."1 d
+'y yh'=. (2,rx)${:"1 d
+s $ , x,.y,.(xw-x),.yh-y
+)
+hue=: 4 : 0
+y=. y*<:#x
+b=. x {~ <.y
+t=. x {~ >.y
+k=. y-<.y
+(t*k)+b*-.k
+)
+hueRGB=: (HUES&$:) : (4 : 0)
+<. 0.5 + x hue y
+)
+polygon=: 1&$: : (4 : '|: clean 2 1 o./ (2p1*x%y)*i.>:y')
+rotate=: 4 : 0
+rot=. 2 2$1 1 _1 1*0 1 1 0{2 1 o. x
+rot +/ . * "2 1 y
+)
