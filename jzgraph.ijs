@@ -333,6 +333,9 @@ popen=: 3 : 0
 'pid pnm siz'=. 3 {. boxopen y
 pnm=. pnm, (0=#pnm) # pid
 wd 'pc ',pid,';pn *',pnm
+wd 'menupop "&File";'
+wd 'menu quit "&Quit" "Ctrl+Q" "" "";'
+wd 'menupopz;'
 wd 'minwh 200 200;cc g isigraph flush'
 wd 'pas 0 0;pcenter;ptop'
 HWNDP=: wd 'qhwndp'
@@ -350,6 +353,7 @@ end.
 (pid,'_g_paint')=: ppaint
 (pid,'_cancel')=: pclose
 (pid,'_close')=: pclose
+(pid,'_quit_button')=: pclose
 wdfit''
 )
 pclose=: destroy
